@@ -4,21 +4,21 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.sugarframework.security.SecurityProvider;
 
-public class ShiroSecurityProvider implements SecurityProvider {
+public class ShiroSecurityProvider implements SecurityProvider<Subject> {
 
 	@Override
-	public Object getSubject() {
+	public Subject getSubject() {
 		return SecurityUtils.getSubject();
 	}
 
 	@Override
-	public boolean isPermitted(Object subject, String permission) {
-		return ((Subject)subject).isPermitted(permission);
+	public boolean isPermitted(Subject subject, String permission) {
+		return subject.isPermitted(permission);
 	}
 
 	@Override
-	public boolean hasRole(Object subject, String role) {
-		return ((Subject)subject).hasRole(role);
+	public boolean hasRole(Subject subject, String role) {
+		return subject.hasRole(role);
 	}
 
 }

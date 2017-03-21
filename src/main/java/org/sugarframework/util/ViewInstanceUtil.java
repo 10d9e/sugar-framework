@@ -74,8 +74,6 @@ public final class ViewInstanceUtil {
 			session.setAttribute(screenAnnotation.value(), instance);
 		}
 		
-		
-				
 		return instance;
 	}
 }

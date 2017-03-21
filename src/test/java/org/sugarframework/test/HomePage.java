@@ -17,19 +17,19 @@ import org.sugarframework.component.common.Table;
 import org.sugarframework.test.vo.Animal;
 
 @Order(1)
-@View(value="Home", title="My Home Page", url="home.html", icon="glyphicon glyphicon-bullhorn")
+@View(value="Home", title="My Home Page", url="index", icon="glyphicon glyphicon-bullhorn")
 public class HomePage {
 
 	private String value;
 	
-	@Order(2) @Table
+	@Order(0) @Table
 	@Label("Animals at the Zoo")
 	private Collection<Animal> animals = new ArrayList<Animal>();
 	{
 	    animals.add( new Animal(2123, "Cha cha", "Canine", new Date(), 67l, false) );
 	}
 		
-	@Order(0) @Action("Do Something")
+	@Order(1) @Action("Do Something")
 	public void doSomething(
 			@Label("s1 Label") 
 			@DefaultValue("default s1 String") 
@@ -59,18 +59,18 @@ public class HomePage {
 		
 	}
 	
-	@Order(1) @Action("Do Something Else")
+	@Order(2) @Action("Do Something Else")
 	public void doSomethingElse(@Label("Hello Label") @Validate("isLessThanFive") int hello, 
 			@Label("Favorite Drink") @Validate("checkDrink") String drink) {
 		System.out.println("Do Something Else called");
 	}
 	
-	@Validator(invalidMessage="Value is NOT less than five")
+	@Validator(value="Value is NOT less than five")
 	public boolean isLessThanFive(int value){
 		return value < 5;
 	}
 	
-	@Validator(invalidMessage="Value is NOT beer")
+	@Validator(value="Value is NOT beer")
 	public boolean checkDrink(String value){
 		return value.equals("beer");
 	}

@@ -61,11 +61,11 @@ public class DefaultDatasourceRegistry implements DatasourceRegistry {
 
             Datasource ds = type.getAnnotation(Datasource.class);
 
-            log.info("Setting up data source.");
+            log.debug("Setting up data source.");
             DataSource dataSource = setupDataSource(ds.url(), ds.user(), ds.password());
-            log.info("Done.");
+            log.debug("Done.");
 
-            log.info("Adding datasource to pool : " + ds.id());
+            log.debug("Adding datasource to pool : " + ds.id());
 
             datasources.put(ds.id(), dataSource);
         }

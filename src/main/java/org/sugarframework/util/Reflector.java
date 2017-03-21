@@ -255,7 +255,7 @@ public class Reflector {
 				if (!isValid) {
 					Validator sugarValidator = method.getAnnotation(Validator.class);
 					if (sugarValidator != null) {
-						log.error(sugarValidator.invalidMessage());
+						log.error(sugarValidator.value());
 					}
 				}
 				return isValid;

@@ -2,6 +2,8 @@ package org.sugarframework.compile;
 
 public class CompilationException extends RuntimeException {
 
+	private static final long serialVersionUID = 1L;
+
 	public CompilationException() {
 		super();
 		// TODO Auto-generated constructor stub

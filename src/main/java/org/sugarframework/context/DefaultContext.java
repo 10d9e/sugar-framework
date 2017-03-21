@@ -79,26 +79,25 @@ public class DefaultContext {
 
 	private DatasourceRegistry datasourceRegistry;
 
-	private SecurityProvider securityProvider;
+	private SecurityProvider<?> securityProvider;
 	
 	private Map<Context, Collection<Class<?>>> screens = new HashMap<>();
 
 	public DefaultContext(Class<?> contextClass) {
 
 		try {
-			Object testObject = contextClass.newInstance();
-
-			context = testObject.getClass().getAnnotation(Context.class);
+			Object sugarContext = contextClass.newInstance();
+			context = sugarContext.getClass().getAnnotation(Context.class);
 
 			if (context == null) {
 				context = Defaults.of(Context.class);
 			}
 
 			if (context == null) {
-				System.err.println("Could not find value @Context annotation on class " + testObject.getClass());
+				System.err.println("Could not find value @Context annotation on class " + sugarContext.getClass());
 			}
 
-			developmentMode = testObject.getClass().getAnnotation(DevelopmentMode.class);
+			developmentMode = sugarContext.getClass().getAnnotation(DevelopmentMode.class);
 
 			if (developmentMode != null) {
 
@@ -217,7 +216,7 @@ public class DefaultContext {
 		try {
 
 			for (final Class<?> sugarScreen : sugarScreens) {
-				wrapTypeAnnotationWithProxy(sugarScreen);
+			//	wrapTypeAnnotationWithProxy(sugarScreen);
 			}
 
 		} catch (Exception e) {
@@ -358,11 +357,8 @@ public class DefaultContext {
 	private void startHttpServer() throws Exception {
 
 		String contextName = context.urlContext();
-
 		int port = Integer.valueOf(context.port());
-
 		final Server server = new Server(port);
-
 		final String CONTEXTPATH = "/" + contextName;
 
 	//	webContext.setDescriptor("WEB-INF/web.xml");
@@ -384,9 +380,7 @@ public class DefaultContext {
 		webContext.addFilter(filterHolder, "/*", types);
 
 		process();
-
 		server.setHandler(webContext);
-
 		webContext.preConfigure();
 
 		server.start();

@@ -2,10 +2,11 @@ package org.sugarframework.servlet;
 
 import static org.reflections.ReflectionUtils.getAllMethods;
 import static org.reflections.ReflectionUtils.withName;
+import static org.sugarframework.context.DefaultContextInitializer.ERROR_THROWING_CONVERTER;
 import static org.sugarframework.util.ClassUtils.getTargetClass;
-import static org.sugarframework.servlet.Constants.CONVERTER;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
@@ -32,13 +33,9 @@ public class SugarValidatorServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 
 		String methodName = (String) req.getParameter("methodName");
-
 		String parameterName = (String) req.getParameter("parameterName");
-
 		String value = req.getParameter("value");
-
 		Object screen = req.getSession().getAttribute("instance");
-
 		try {
 
 			@SuppressWarnings("unchecked")
@@ -54,28 +51,31 @@ public class SugarValidatorServlet extends HttpServlet {
 				}
 
 				Class<?> pType = method.getParameterTypes()[0];
-
 				Object realValue = null;
-
 				if (Reflector.isBean(pType)) {
-
 					realValue = handleBeanType(req.getParameterMap(), parameterName, pType);
-
-				} else {
-
+				} else if (!"".equals(value)){
 					//realValue = Reflector.hardCast(value, pType);
-					
-					realValue = CONVERTER.convert(value, pType);
+					realValue = ERROR_THROWING_CONVERTER.convert(value, pType);
 				}
 
-				Boolean isValid = (Boolean) method.invoke(screen, realValue);
-
+				method.setAccessible(true);
+				Boolean isValid = false;
+				try{
+					isValid = (Boolean) method.invoke(screen, realValue);
+				}catch(InvocationTargetException e){
+					resp.getOutputStream().print(String.format( String.format("Error executing Validation method : '%s.%s'", screen.getClass().getName(), method.getName()  )) );
+					if(realValue == null){
+						resp.getOutputStream().print(" (Possible null check error)");
+					}
+					resp.setStatus(SUGAR_VALIDATION_ERROR);
+					return;
+				}
 				if (!isValid) {
 					Validator sugarValidator = method.getAnnotation(Validator.class);
 					if (sugarValidator != null) {
-						try {
-							
-							resp.getOutputStream().print(sugarValidator.invalidMessage());
+						try {		
+							resp.getOutputStream().print(sugarValidator.value());
 							resp.setStatus(SUGAR_VALIDATION_ERROR);
 							
 						} catch (IOException e) {
@@ -89,14 +89,9 @@ public class SugarValidatorServlet extends HttpServlet {
 		} catch (Exception e) {
 
 			try {
-				
-				// resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				//    PrintWriter out = resp.getWriter();
-				//    out.println("error");
-				//    out.close();
-				
+				e.printStackTrace();
 				resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-						"There was an problem validating a parameter.");
+						e.getMessage());
 			} catch (IOException e1) {
 				throw new SugarException(e.getMessage(), e1);
 			}
@@ -104,7 +99,7 @@ public class SugarValidatorServlet extends HttpServlet {
 
 	}
 
-	private Object handleBeanType(Map<?, ?> parameterMap, String key, Class<?> type) {
+	private Object handleBeanType(Map<String, ?> parameterMap, String key, Class<?> type) {
 
 		return FormUtil.populate(type, parameterMap);
 

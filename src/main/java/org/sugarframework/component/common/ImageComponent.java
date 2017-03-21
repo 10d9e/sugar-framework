@@ -10,7 +10,8 @@ public class ImageComponent extends AbstractSugarComponent<Image, Object, Field>
 
 	@Override
 	public String render(Image anno, Object data, Field member) {
-		return String.format("<img src=\"%s\" class=\"img-responsive\" alt=\"Responsive image\">", ev(anno.value()));
+		Object o = ev(anno.value());
+		return String.format("<img src=\"%s\" class=\"img-responsive\" alt=\"Responsive image\">", o);
 	}
 
 }

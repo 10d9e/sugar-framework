@@ -27,8 +27,7 @@ public final class TableTest {
     	dao.create();
     }
     
-    @Order(2) 
-    @Live 
+    @Order(0) @Live(refresh=1)
     @Table
     @Label("Animals at the Zoo") 
     @BindReturnData
@@ -36,16 +35,14 @@ public final class TableTest {
     	return dao.all();
     }
     
-    @Order(3) 
-    @Live 
+    @Order(2) @Live 
     @UnorderedList 
     @BindReturnData
     public Collection<String> getAnimalNames(){
     	return dao.names();
     }
     
-    @Order(0) 
-    @Action("Add New Animal")
+    @Order(1) @Action("Add New Animal")
     public void addTwoNewAnimals(@Label("Animal") Animal animal,
     		@Label("Animal 2") Animal animal2){
     	dao.add(animal);

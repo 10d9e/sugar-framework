@@ -11,12 +11,8 @@ import java.lang.annotation.Target;
 @Target({ ElementType.TYPE })
 public @interface View {
 	String value();
-
 	String url() default "";
-
 	String icon() default "";
-
 	String title() default "";
-	
 	boolean isStatic() default false;
 }

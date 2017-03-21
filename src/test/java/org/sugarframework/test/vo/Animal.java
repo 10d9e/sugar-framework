@@ -20,7 +20,7 @@ public class Animal {
 	@Label("Family")
 	private String family;
 
-	@Label("Birthdate")
+	@Label("Birth date")
 	private Date birthdate;
 
 	@Label("A Long Number")

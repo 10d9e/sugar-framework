@@ -73,12 +73,12 @@ public class BigScreen {
 	}
 	
 	
-	@Validator(invalidMessage="Value is NOT less than five")
+	@Validator(value="Value is NOT less than five")
 	public boolean isLessThanFive(int value){
 		return value < 5;
 	}
 	
-	@Validator(invalidMessage="Value is NOT beer")
+	@Validator(value="Value is NOT beer")
 	public boolean checkDrink(String value){
 		return value.equals("beer");
 	}

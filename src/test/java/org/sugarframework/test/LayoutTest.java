@@ -16,28 +16,27 @@ import org.sugarframework.component.common.UnorderedList;
 @View(value="Layout", url="layout", icon="glyphicon glyphicon-asterisk")
 @Container(rows = {
 	@Row(value="row2", columns = {
-		@Column(value="beer", width=ColumnWidth.TWELVE),
 		@Column(value="container1", width=ColumnWidth.EIGHT),
 		@Column(value="container5", width=ColumnWidth.FOUR),
-		@Column(value="container3", width=ColumnWidth.FOUR)
+		@Column(value="container3", width=ColumnWidth.FOUR),
+		@Column(value="container4", width=ColumnWidth.FOUR),
+		@Column(value="beer", width=ColumnWidth.TWELVE)
 	}),
 	@Row(value="row5", columns = {
-		@Column(value="container4", width=ColumnWidth.FOUR),
-		@Column(value="container7", width=ColumnWidth.SIX),
-		@Column(value="container6", width=ColumnWidth.SIX)
+		@Column(value="container2", width=ColumnWidth.FOUR),
+		@Column(value="container6", width=ColumnWidth.SIX),
+		@Column(value="container7", width=ColumnWidth.SIX)
 	}),
 	@Row(value="row4"),
 	@Row(value="row1", columns = {
 		@Column(value="container10", width=ColumnWidth.TWO),
-		@Column(value="container12", width=ColumnWidth.TWO),
+		@Column(value="container13", width=ColumnWidth.TWO),
 		@Column(value="container8", width=ColumnWidth.TWO),
 		@Column(value="container9", width=ColumnWidth.TWO),
-		@Column(value="container11", width=ColumnWidth.TWO),
-		@Column(value="container13", width=ColumnWidth.TWO)
+		@Column(value="container12", width=ColumnWidth.TWO),
+		@Column(value="container11", width=ColumnWidth.TWO)
 	}),
-	@Row(value="row3", columns = {
-		@Column(value="container2", width=ColumnWidth.FOUR)
-	})
+	@Row(value="row3")
 
 })
 public class LayoutTest {

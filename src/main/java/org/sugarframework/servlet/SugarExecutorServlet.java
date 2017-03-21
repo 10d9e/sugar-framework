@@ -3,7 +3,7 @@ package org.sugarframework.servlet;
 import static org.reflections.ReflectionUtils.getAllMethods;
 import static org.reflections.ReflectionUtils.withAnnotation;
 import static org.sugarframework.util.ClassUtils.getTargetClass;
-import static org.sugarframework.servlet.Constants.CONVERTER;
+import static org.sugarframework.context.DefaultContextInitializer.CONVERTER;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -35,9 +35,9 @@ import com.google.common.base.Predicates;
 
 public class SugarExecutorServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
 
-	private static final short SUGAR_ERROR = 279;
+	static final short SUGAR_ERROR = 279;
 
 	private static final short SUGAR_REDIRECT = 278;
 
@@ -85,16 +85,15 @@ public class SugarExecutorServlet extends HttpServlet {
 					Object realValue = null;
 
 					if (Reflector.isBean(type)) {
-
 						realValue = handleBeanType(parameterMap, key, type);
-
 					} else {
-
 						String value = ((String[]) parameterMap.get(key))[0];
+						if("".equals(value) && java.util.Date.class.equals(type)){
+							realValue = null;
+						}else{
+							realValue = CONVERTER.convert(value, type);
+						}
 
-						realValue = CONVERTER.convert(value, type);
-
-						// realValue = Reflector.hardCast(value, type);
 					}
 
 					args[c++] = realValue;
@@ -130,7 +129,7 @@ public class SugarExecutorServlet extends HttpServlet {
 
 			try {
 				handleExceptionDelegates(e, screen);
-				String errorMessage = String.format("%s[%s]", "Error", e.getCause());
+				String errorMessage = String.format("%s : %s", "Error", e.getMessage());
 				if (messageOnException != null) {
 					errorMessage = messageOnException;
 				}

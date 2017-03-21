@@ -22,6 +22,8 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.sugarframework.SugarException;
 import org.sugarframework.Tuple;
 import org.sugarframework.compile.CharSequenceJavaFileObject;
@@ -29,6 +31,8 @@ import org.sugarframework.compile.ClassFileManager;
 import org.sugarframework.context.DefaultContextInitializer;
 
 public final class CompilerUtil {
+	
+	private static Log log = LogFactory.getLog(CompilerUtil.class);
 	
 	public static final String findDebugSourcePath(final Class<?> clazz) {
 
@@ -67,6 +71,7 @@ public final class CompilerUtil {
 				if (name != null && matcher.matches(name)) {
 
 					String filename = Paths.get(file.toUri()).normalize().toString();
+					log.trace("Recompiling " + filename);
 
 					try {
 						Tuple<String, Object> no = compileAndLoadJava(filename);

@@ -1,11 +1,11 @@
 package org.sugarframework.security;
 
-public interface SecurityProvider {
+public interface SecurityProvider<T> {
 	
-	Object getSubject();
+	T getSubject();
 	
-	boolean isPermitted(Object subject, String permission);
+	boolean isPermitted(T subject, String permission);
 	
-	boolean hasRole(Object subject, String role);
+	boolean hasRole(T subject, String role);
 
 }

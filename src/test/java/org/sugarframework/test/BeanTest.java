@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.sugarframework.DefaultValue;
 import org.sugarframework.Label;
 import org.sugarframework.Link;
+import org.sugarframework.MessageOnSuccess;
 import org.sugarframework.Order;
 import org.sugarframework.Validate;
 import org.sugarframework.Validator;
@@ -29,13 +30,14 @@ public class BeanTest {
 	
 	private int defaultInteger = 42;
 
-	@Descriptor({ "Hello", "Just add some Sugar to your Java web app and enjoy." })
+	@Order(0) @Descriptor({ "Hello", "Just add some Sugar to your Java web app and enjoy." })
     Void d;
 	
 	@Link(pageName="Home", containerId="containerId", toolTip="My Tooltip")
 	private String myTestLink = "Go Home";
 	
-	@Action
+	@Order(1) @Action
+	@MessageOnSuccess("Mission Complete, Jim")
 	public void testBean( 
 			@Label("Zoo Name") @DefaultValue("${ me.DEFAULT_ZOO_VALUE }") String zooName,
 			@Label("Zoo Location") @DefaultValue("${ me.defaultLocation }") String zooLocation,
@@ -47,7 +49,7 @@ public class BeanTest {
 		System.out.println(animal);
 	}
 	
-	@Validator(invalidMessage="Invalid Postal Code Format")
+	@Validator(value="Invalid Postal Code Format")
 	public boolean validatePostalCodeFormat(String code){
 	
 		return code.matches("^[ABCEGHJKLMNPRSTVXY]{1}\\d{1}[A-Z]{1} *\\d{1}[A-Z]{1}\\d{1}$");

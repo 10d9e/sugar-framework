@@ -1,0 +1,143 @@
+<%@page import="org.sugarframework.DefaultValue"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="org.sugarframework.View"%>
+<%@ page import="org.sugarframework.Label"%>
+<%@ page import="org.sugarframework.Context"%>
+<%@ page import="org.sugarframework.DefaultValue"%>
+<%@ page import="org.sugarframework.Validate"%>
+<%@ page import="org.sugarframework.Choice"%>
+<%@ page import="java.lang.reflect.Method"%>
+<%@ page import="java.util.Map"%>
+<%@ page import="java.util.Map.Entry"%>
+<%@ page import="java.util.Set"%>
+<%@ page import="java.util.Collection"%>
+<%@ page import="java.lang.annotation.Annotation"%>
+
+<%
+	String url = request.getRequestURL().toString();
+String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+%>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets-boot/img/sugar32.ico">
+
+    <title>Welcome to Sugar Framework</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets-boot/css/style/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets-boot/css/cover.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+            
+              <h3 class="masthead-brand">Sugar Framework</h3>
+              <h5 class="masthead-brand"> beta</h5>
+              <ul class="nav masthead-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <img src="assets-boot/img/sugar256.png"/>
+            <h1 class="cover-heading">You made it!</h1>
+            <p class="lead">Congratulations, you are one step closer to sugary zen.  Looks like you've created the following :</p>
+			<%
+				for ( Entry<Context, Collection<Class<?>>> ctx : org.sugarframework.context.DefaultContextInitializer.getContext().getScreens().entrySet()){
+					Context context = ctx.getKey();
+			%>
+				<p class="lead">
+				<b><%=String.format("Sugar Context : [%s]",context.value())%></b>
+				</p>
+				<%
+					Collection<Class<?>> pages = ctx.getValue();
+						for (Class<?> p : pages){ 
+							View anno = p.getAnnotation(View.class);
+				%>
+					<p> 
+					<%=anno.value()%>
+					<a href="<%=String.format("%s%s", baseURL, anno.url()) %>"><b><%=String.format("[%s%s]",  baseURL, anno.url()) %></b></a>
+					<%=String.format("(%s)", p.getName())%>
+					</p>   
+				<% }
+			}
+			%>
+			
+			{{#each views}}
+											
+					{{#ifPermitted}}											
+						{{#unless first.static}}
+							
+							{{#equals first.value view.value}}
+								<li class="active">
+							{{else}}
+								<li>
+							{{/equals}}
+							
+							<a href="{{first.url}}">
+								<span
+								class="{{first.icon}}"></span>
+								{{first.value}}						
+							</a>
+							</li>
+							
+						{{/unless}}
+					{{/ifPermitted}}	
+									
+				{{/each}}
+			
+
+            <p class="lead">
+              <a href="#" class="btn btn-lg btn-default">Learn more</a>
+            </p>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Cover template by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="assets-boot/js/bootstrap.min.js"></script>
+    <script src="assets-boot/js/docs.min.js"></script>
+  </body>
+</html>

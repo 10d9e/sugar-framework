@@ -11,7 +11,7 @@
 <title>{{view.title}}</title>
 
 <!-- Bootstrap core CSS -->
-<link href="assets-boot/css/style/{{context.style}}" rel="stylesheet">
+<link href="assets-boot/css/style/{{context.style}}.css" rel="stylesheet">
 <link href="assets-boot/css/navbar-static-top.css" rel="stylesheet">
 <link href="assets-boot/css/datepicker.css" rel="stylesheet">
 
@@ -113,10 +113,10 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 
-	<script type="text/javascript" language="javascript"
-		src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="assets-boot/js/jquery-1.10.2.min.js"></script>	
 	<script src="assets-boot/js/bootstrap.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	<script src="assets-boot/js/jquery-ui.min.js"></script>
+	
 	
 	<script src="assets-boot/js/bootstrap-datepicker.js"></script>
 	<script src="assets-boot/js/layout.js"></script>
@@ -131,7 +131,7 @@
 
 			{{{documentReady instance}}}
 
-			$('#tabs').tab();
+			$('#tabs').tab
 			$('.datepicker').datepicker();
 
 			validatePageInputs();
@@ -167,7 +167,6 @@
 									+ '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
 									+ message + '</div>');
 		}
-
 		
 	</script>
 

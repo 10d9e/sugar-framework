@@ -101,8 +101,12 @@ class ContainerHelper implements Helper<Object> {
 					// containerBuffer.append("\t\tHello " + column.value()
 					// + "\n");
 
-					for (String rendering : getRenderingsMap(page).get(column.value())) {
-						containerBuffer.append(rendering);
+					Map<String, List<String>> map = getRenderingsMap(page);
+					List<String> renderings = map.get(column.value());
+					if(!map.isEmpty() && renderings != null && !renderings.isEmpty()){
+						for (String rendering : renderings) {
+							containerBuffer.append(rendering);
+						}
 					}
 
 					containerBuffer.append("\t</div>\n");

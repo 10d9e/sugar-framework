@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.sugarframework.DefaultValue;
 import org.sugarframework.Label;
 import org.sugarframework.Link;
+import org.sugarframework.MessageOnSuccess;
 import org.sugarframework.Order;
 import org.sugarframework.Validate;
 import org.sugarframework.View;
@@ -36,6 +37,7 @@ public class FormTest {
 	private String myTestLink = "Go Home";
 	
 	@Action("Lets test") @Order(3)
+	@MessageOnSuccess("Mission Complete, Jim")
 	public void testBean( 
 			@Label("Zoo Name") @DefaultValue("${ me.DEFAULT_ZOO_VALUE }") String zooName,
 			@Label("Zoo Location") @DefaultValue("${ me.defaultLocation }") String zooLocation,
@@ -48,6 +50,7 @@ public class FormTest {
 	}
 	
 	@Action("Lets test2") @Order(2)
+	@MessageOnSuccess("Mission Complete, Jim")
 	public void testBean2( 
 			@Label("Zoo Name") @DefaultValue("${ me.DEFAULT_ZOO_VALUE }") String zooName,
 			@Label("Zoo Location") @DefaultValue("${ me.defaultLocation }") String zooLocation,

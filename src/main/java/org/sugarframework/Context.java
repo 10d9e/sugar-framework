@@ -25,13 +25,13 @@ public @interface Context {
 
 	String image() default "";
 
-	String secure() default "false";
+	String secure() default "true";
 
 	String template() default "template.sugar";
 
-	String style() default "bootstrap.css";
+	String style() default "bootstrap";
 
-	String footerMessage() default "© Company 2014";
+	String footerMessage() default "© Company 2016";
 
 	String[] resourceDirectories() default {};
 
