@@ -5,6 +5,7 @@ Sugar Framework is a View Inversion framework for the Java Programming Language.
 In the same way that numerous modern inversion of control containers like Spring and Guice have successfully inverted data and service resource dependencies, View Inversion delegates view generation and data binding to inversion annotations.
 
 # Show me the code
+```java
 // Data Inversion with JPA
 @Entity
 public class Employee {
@@ -39,7 +40,7 @@ public class EmployeeView {
   }
 
 }
-
+```
 
 # Setup
 gradlew clean eclipse
