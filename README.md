@@ -25,14 +25,13 @@ public class EmployeeView {
   @Inject
   private EmployeeService service;
   
-  // Inverted Fields bind Collection data to view components like @Table 
-  @Table
-  @Label("Animals at the Zoo")
+  // Inverted fields bind Collection data to view components like Tables, Lists, etc 
+  @Table("Animals at the Zoo")
   private Collection<Animal> animals = new ArrayList<Animal>();
   
   // Inverted methods are bound to View actions
   @Action("Do Something")
-	public void executeSomething(@Label("First Name") String name){
+  public void executeSomething(@Label("First Name") String name){
       // do something here...
   }
 }
