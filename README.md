@@ -1,5 +1,5 @@
 # Sugar Framework
-Sugar Framework is a View Inversion framework for the Java Programming Language.
+Sugar Framework is a View Inversion framework for the Java Programming Language. It abstracts away the complexity of web request/response lifecycle and web container management with simple annotations.
 
 # What is View Inversion?
 In the same way that modern inversion of control containers like Spring and Guice have successfully inverted data and service resource dependencies, View Inversion delegates view generation and data binding via inversion annotations.
