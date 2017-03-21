@@ -1,0 +1,28 @@
+.orange {
+    color: orange;
+}
+
+.green {
+    color: green;
+}
+
+.container{
+	max-width: 900px;
+}
+
+.left-inner-addon {
+	position: relative;
+}
+
+.left-inner-addon input {
+	padding-left: 30px;
+}
+
+.left-inner-addon i {
+	position: absolute;
+	padding: 10px 12px;
+}
+
+.handle {
+position: relative;
+}

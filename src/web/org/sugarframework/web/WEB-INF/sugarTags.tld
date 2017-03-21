@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd">
+  <tlib-version>1.0</tlib-version>
+    <short-name>ct</short-name>
+    <uri>/WEB-INF/sugarTags</uri>
+    
+    <tag>
+        <name>container</name>
+        <tag-class>org.sugarframework.tags.ContainerLayout</tag-class>
+        <body-content>JSP</body-content>
+        <info>Build the Container and corresponding layout</info>
+        
+        <attribute>
+            <name>page</name>
+            <required>true</required>
+            <description>Provide the page</description>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        
+    </tag>
+    
+    <tag>
+        <name>inject-stylesheets</name>
+        <tag-class>org.sugarframework.tags.InjectStyleSheetReferences</tag-class>
+        <body-content>JSP</body-content>
+        <info>Inject script references from all components</info>
+        
+        <attribute>
+            <name>page</name>
+            <required>true</required>
+            <description>Provide the page</description>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        
+    </tag>
+    
+    <tag>
+        <name>inject-scripts</name>
+        <tag-class>org.sugarframework.tags.InjectScriptReferences</tag-class>
+        <body-content>JSP</body-content>
+        <info>Inject script references from all components</info>
+        
+        <attribute>
+            <name>page</name>
+            <required>true</required>
+            <description>Provide the page</description>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        
+    </tag>
+    
+    <tag>
+        <name>inject-document-ready</name>
+        <tag-class>org.sugarframework.tags.InjectDocumentReady</tag-class>
+        <body-content>JSP</body-content>
+        <info>Inject document ready code from all components</info>
+        
+        <attribute>
+            <name>page</name>
+            <required>true</required>
+            <description>Provide the page</description>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        
+    </tag>
+    
+    <tag>
+        <name>all-components</name>
+        <tag-class>org.sugarframework.tags.AllSugarComponents</tag-class>
+        <body-content>JSP</body-content>
+        <info>Renders all of the sugar components attached to the page</info>
+        
+        <attribute>
+            <name>page</name>
+            <required>true</required>
+            <description>Provide the page</description>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        
+    </tag>
+    
+    <tag>
+        <name>top-components</name>
+        <tag-class>org.sugarframework.tags.TopSugarComponentTags</tag-class>
+        <body-content>JSP</body-content>
+        <info>Renders all of the sugar components attached to the page</info>
+        
+        <attribute>
+            <name>page</name>
+            <required>true</required>
+            <description>Provide the page</description>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        
+    </tag>
+    
+    <tag>
+        <name>bottom-components</name>
+        <tag-class>org.sugarframework.tags.BottomSugarComponentTags</tag-class>
+        <body-content>JSP</body-content>
+        <info>Renders all of the sugar components attached to the page</info>
+        
+        <attribute>
+            <name>page</name>
+            <required>true</required>
+            <description>Provide the page</description>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        
+    </tag>
+    
+    <tag>
+        <name>today</name>
+        <tag-class>org.sugarframework.tags.TodayTag</tag-class>
+        <body-content>JSP</body-content>
+        <info>This Tag Displayes current server date in usser defined format</info>
+        <attribute>
+            <name>format</name>
+            <required>true</required>
+            <description>Provide a display format</description>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <name>pagefield</name>
+        <tag-class>org.sugarframework.tags.PageField</tag-class>
+        <body-content>JSP</body-content>
+        <info>This Tag Displays the value of the selected annotation</info>
+       
+        <attribute>
+            <name>fieldName</name>
+            <required>true</required>
+            <description>Provide the annotation field</description>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+    </tag>
+    
+    
+    
+    <tag>
+        <name>annotationValue</name>
+        <tag-class>org.sugarframework.tags.PageAnnotationTag</tag-class>
+        <body-content>JSP</body-content>
+        <info>This Tag Displayes current server date in usser defined format</info>
+        
+        <attribute>
+            <name>annotation</name>
+            <required>true</required>
+            <description>Provide the annotation</description>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        
+        <attribute>
+            <name>field</name>
+            <required>true</required>
+            <description>Provide a display format</description>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+        
+    </tag>
+    
+    <tag>
+        <name>badge</name>
+        <tag-class>org.sugarframework.tags.BadgeTag</tag-class>
+        <body-content>JSP</body-content>
+        <info>This Tag Displayes current server date in usser defined format</info>
+        
+        <attribute>
+            <name>page</name>
+            <required>true</required>
+            <description>Provide the annotation</description>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        
+    </tag>
+    
+</taglib>
